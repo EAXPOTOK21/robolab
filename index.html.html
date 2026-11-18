@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>РобоЛаб — центр робототехники для детей и подростков</title>
+<style>
+:root{--bg:#f6f8fb;--card:#fff;--ink:#14213d;--mut:#55627a;--acc:#ff6b2c;--acc2:#1f6feb;--line:#dde3ee;--ok:#1a8a4a;--warn:#b4541a;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1624;--card:#18223a;--ink:#eaf0fb;--mut:#a3b0c9;--line:#2a3857;--acc:#ff8a57;--acc2:#6aa2ff;--ok:#4cc882;--warn:#ffa36b;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0f1624;--card:#18223a;--ink:#eaf0fb;--mut:#a3b0c9;--line:#2a3857;--acc:#ff8a57;--acc2:#6aa2ff;--ok:#4cc882;--warn:#ffa36b;color-scheme:dark}
+html{scroll-behavior:smooth;scroll-padding-top:70px}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif}
+.w{max-width:1040px;margin:0 auto;padding:0 18px}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--card);border-bottom:1px solid var(--line)}
+nav{display:flex;align-items:center;gap:6px;flex-wrap:wrap;padding:10px 0}
+nav b{font-size:20px;margin-right:auto}nav b span{color:var(--acc)}
+nav a{color:var(--ink);text-decoration:none;padding:6px 10px;border-radius:8px;font-size:14px}
+nav a:hover{background:var(--bg)}
+.btn{display:inline-block;background:var(--acc);color:#fff;border:0;border-radius:10px;padding:13px 22px;font:600 16px inherit;font-family:inherit;text-decoration:none;cursor:pointer}
+.btn.s{background:transparent;color:var(--acc2);border:2px solid var(--acc2)}
+.hero{padding:54px 0 34px}
+h1{font-size:clamp(28px,5vw,44px);line-height:1.15;margin:0 0 14px}
+.hero p{font-size:18px;color:var(--mut);max-width:620px;margin:0 0 22px}
+.facts{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+.facts span{background:var(--card);border:1px solid var(--line);border-radius:999px;padding:6px 14px;font-size:14px}
+section{padding:34px 0}
+h2{font-size:26px;margin:0 0 6px}
+.sub{color:var(--mut);margin:0 0 20px}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+.chip{border:2px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:8px 16px;font:inherit;cursor:pointer}
+.chip.on{border-color:var(--acc2);background:var(--acc2);color:#fff}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:16px}
+.card{background:var(--card);border:2px solid var(--line);border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:8px}
+.card.hl{border-color:var(--acc2)}
+.card h3{margin:0;font-size:21px}
+.tag{font-size:13px;color:var(--acc2);font-weight:600}
+.card ul{margin:4px 0;padding-left:18px}
+.price{font-size:26px;font-weight:700}.price small{font-size:14px;font-weight:400;color:var(--mut)}
+dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:3px 12px;font-size:15px}
+dt{color:var(--mut)}dd{margin:0}
+.card .btn{margin-top:auto;text-align:center}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;counter-reset:s}
+.steps div{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 16px 16px 54px;position:relative}
+.steps div:before{counter-increment:s;content:counter(s);position:absolute;left:14px;top:14px;width:28px;height:28px;border-radius:50%;background:var(--acc);color:#fff;display:grid;place-items:center;font-weight:700}
+form{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+label{display:flex;flex-direction:column;gap:5px;font-size:14px;color:var(--mut)}
+input,select,textarea{font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:10px}
+.full{grid-column:1/-1}
+.sum{background:var(--bg);border-radius:12px;padding:14px;color:var(--ink)}
+.sum b{font-size:20px}
+.note{font-size:14px;color:var(--warn)}
+.ok{color:var(--ok)}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+.box{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px}
+.box h3{margin:0 0 8px;font-size:18px}.box ul{margin:0;padding-left:18px}.box li{margin-bottom:5px}
+footer{border-top:1px solid var(--line);padding:26px 0;color:var(--mut);font-size:14px;margin-top:20px}
+</style>
+</head>
+<body>
+<header><div class="w"><nav>
+<b>Робо<span>Лаб</span></b>
+<a href="#programs">Программы</a><a href="#how">Как записаться</a><a href="#apply">Запись</a><a href="#terms">Условия</a><a href="#faq">Если что-то пошло не так</a><a href="#contacts">Контакты</a>
+</nav></div></header>
+
+<main>
+<div class="w hero">
+<h1>Дети собирают и программируют роботов — с первого занятия</h1>
+<p>Очные группы до 8 человек для детей 7–17 лет. Конструкторы выдаём на занятии. Первое пробное занятие бесплатно — без обязательств.</p>
+<a class="btn" href="#apply">Записаться на пробное занятие</a>
+<div class="facts"><span>Группы до 8 детей</span><span>Занятие 90 минут, раз в неделю</span><span>Оборудование включено в цену</span><span>Пробное — 0 ₽</span></div>
+</div>
+
+<section id="programs"><div class="w">
+<h2>Программы</h2>
+<p class="sub">Выберите возраст ребёнка — подсветим подходящую программу.</p>
+<div class="chips" id="chips">
+<button class="chip" data-p="start">7–9 лет</button><button class="chip" data-p="kon">10–12 лет</button><button class="chip" data-p="eng">13–17 лет</button>
+</div>
+<div class="grid">
+<article class="card" id="c-start"><span class="tag">7–9 лет · без опыта</span><h3>Старт</h3>
+<p>Собираем механизмы из LEGO SPIKE Essential и учимся управлять ими блоками-командами.</p>
+<ul><li>робот-краб, вентилятор, шагающий механизм</li><li>основы алгоритмов: последовательность, цикл, условие</li><li>мини-проект в конце модуля</li></ul>
+<dl><dt>Формат</dt><dd>очно, группа до 8 детей</dd><dt>Длительность</dt><dd>90 мин, 4 занятия в месяц</dd><dt>В цену входит</dt><dd>наборы на занятии, ПО, преподаватель</dd><dt>Группы</dt><dd>Вт 17:00 · Сб 11:00</dd></dl>
+<div class="price">3 600 ₽ <small>/ месяц · 9 720 ₽ за 3 месяца</small></div>
+<a class="btn" href="#apply" data-pick="start">Выбрать «Старт»</a></article>
+
+<article class="card" id="c-kon"><span class="tag">10–12 лет · после «Старта» или с нуля</span><h3>Конструктор</h3>
+<p>Роботы на LEGO SPIKE Prime с датчиками. Переходим от блоков к Python.</p>
+<ul><li>робот-сумоист и линия-следователь</li><li>датчики цвета, расстояния, гироскоп</li><li>подготовка к школьным робо-соревнованиям</li></ul>
+<dl><dt>Формат</dt><dd>очно, группа до 8 детей</dd><dt>Длительность</dt><dd>90 мин, 4 занятия в месяц</dd><dt>В цену входит</dt><dd>наборы на занятии, ПО, преподаватель</dd><dt>Группы</dt><dd>Ср 17:30 · Сб 13:00</dd></dl>
+<div class="price">4 400 ₽ <small>/ месяц · 11 880 ₽ за 3 месяца</small></div>
+<a class="btn" href="#apply" data-pick="kon">Выбрать «Конструктор»</a></article>
+
+<article class="card" id="c-eng"><span class="tag">13–17 лет · нужен базовый уровень</span><h3>Инженер</h3>
+<p>Собственные устройства на Arduino: схемы, пайка, корпус на 3D-принтере.</p>
+<ul><li>умная метеостанция, робот-манипулятор</li><li>C++ для микроконтроллеров, работа с датчиками</li><li>итоговый проект для портфолио</li></ul>
+<dl><dt>Формат</dt><dd>очно, группа до 8 подростков</dd><dt>Длительность</dt><dd>90 мин, 4 занятия в месяц</dd><dt>В цену входит</dt><dd>платы, детали, 3D-печать, преподаватель</dd><dt>Группы</dt><dd>Чт 18:30 · Вс 12:00</dd></dl>
+<div class="price">5 200 ₽ <small>/ месяц · 14 040 ₽ за 3 месяца</small></div>
+<a class="btn" href="#apply" data-pick="eng">Выбрать «Инженер»</a></article>
+</div>
+<p class="sub" style="margin-top:14px">Не знаете, какая программа подойдёт? Запишитесь на пробное: преподаватель оценит уровень и посоветует группу.</p>
+</div></section>
+
+<section id="how"><div class="w">
+<h2>Как записаться</h2><p class="sub">Онлайн — только заявка. Остальное проходит в центре.</p>
+<div class="steps">
+<div><b>Заявка на сайте</b><br>Выбираете программу и время (онлайн).</div>
+<div><b>Подтверждение</b><br>Администратор пишет или звонит в течение 1 рабочего дня (вне сайта).</div>
+<div><b>Пробное занятие</b><br>Бесплатно, в центре, с преподавателем.</div>
+<div><b>Оплата и старт</b><br>Платите абонемент после пробного, ребёнок продолжает в своей группе.</div>
+</div>
+</div></section>
+
+<section id="apply"><div class="w">
+<h2>Запись на пробное занятие</h2><p class="sub">Оплата не нужна. Сумма абонемента показана заранее — вы платите её только после пробного.</p>
+<form id="f">
+<label>Имя родителя<input name="name" required placeholder="Анна Иванова"></label>
+<label>Телефон или e-mail<input name="contact" required placeholder="+7 900 000-00-00"></label>
+<label>Возраст ребёнка<input name="age" type="number" min="7" max="17" required placeholder="от 7 до 17"></label>
+<label>Программа<select name="prog" id="prog"><option value="start">Старт (7–9 лет)</option><option value="kon">Конструктор (10–12 лет)</option><option value="eng">Инженер (13–17 лет)</option></select></label>
+<label>Время пробного занятия<select name="slot" id="slot"></select></label>
+<label>Абонемент после пробного<select name="plan" id="plan"><option value="m">1 месяц (4 занятия)</option><option value="q">3 месяца (12 занятий, скидка 10%)</option></select></label>
+<label class="full">Комментарий (по желанию)<textarea name="msg" rows="2" placeholder="Опыт ребёнка, пожелания"></textarea></label>
+<div class="sum full" id="sum"></div>
+<div class="full"><button class="btn" id="go" type="submit">Отправить заявку</button> <span id="res" class="ok"></span></div>
+</form>
+</div></section>
+
+<section id="terms"><div class="w">
+<h2>Условия</h2>
+<div class="two">
+<div class="box"><h3>Оплата</h3><ul><li>Пробное занятие бесплатное.</li><li>Абонемент оплачивается после пробного и подтверждения места, до первого платного занятия.</li><li>Способы: СБП, банковская карта по ссылке из сообщения администратора, перевод; наличные — в центре.</li><li>Цена абонемента на сайте — итоговая, дополнительных платежей за наборы нет.</li></ul></div>
+<div class="box"><h3>Получение услуги</h3><ul><li>Занятия очные, в центре. Доставки нет.</li><li>Наборы и ноутбуки выдаются на занятии и остаются в центре.</li><li>Ответ на заявку — в течение 1 рабочего дня; старт — в ближайшей группе, обычно в течение 14 дней.</li></ul></div>
+<div class="box"><h3>Отмена и перенос</h3><ul><li>Пробное можно отменить или перенести не позднее чем за 3 часа.</li><li>Пропуск платного занятия: предупредите за 24 часа — отработаем в другой группе в течение месяца.</li><li>Без предупреждения занятие считается проведённым.</li></ul></div>
+<div class="box"><h3>Возврат</h3><ul><li>Если отказываетесь от обучения, вернём деньги за непроведённые занятия по письменной заявке в течение 10 рабочих дней.</li><li>Для абонемента на 3 месяца занятия пересчитываются по цене месячного абонемента (без скидки).</li></ul></div>
+</div>
+</div></section>
+
+<section id="faq"><div class="w">
+<h2>Если что-то пошло не так</h2>
+<div class="box"><h3>Выбранная группа или время заполнены</h3>
+<ul><li>В заявке такое время помечено «мест нет» — мы честно показываем это до отправки.</li><li>Выберите другое время той же программы или оставьте заявку в лист ожидания: напишем, как только освободится место, обычно в течение недели.</li><li>Если не подходит ни одно время, укажите удобные дни в комментарии — подберём или откроем новую группу при наборе 4 детей.</li><li>Деньги за это время не берутся: оплата происходит только после подтверждённого пробного.</li></ul></div>
+</div></section>
+
+<section id="contacts"><div class="w">
+<h2>Контакты</h2>
+<div class="box"><ul><li>Почта: <a href="mailto:hello@robolab-center.example" style="color:var(--acc2)">hello@robolab-center.example</a></li><li>Telegram: @robolab_center (учебный проект)</li><li>Режим работы администратора: пн–сб, 10:00–19:00</li></ul></div>
+</div></section>
+</main>
+<footer><div class="w">РобоЛаб — учебный проект. Цены и условия приведены в демонстрационных целях.</div></footer>
+
+<script>
+var P={start:{n:'Старт',m:3600,q:9720,s:[['Вт 17:00',3],['Сб 11:00',5]],a:[7,9]},kon:{n:'Конструктор',m:4400,q:11880,s:[['Ср 17:30',2],['Сб 13:00',0]],a:[10,12]},eng:{n:'Инженер',m:5200,q:14040,s:[['Чт 18:30',4],['Вс 12:00',1]],a:[13,17]}};
+var $=function(i){return document.getElementById(i)};
+var f=$('f'),prog=$('prog'),slot=$('slot'),plan=$('plan'),sum=$('sum'),go=$('go');
+function rub(n){return n.toLocaleString('ru-RU')+' ₽'}
+function hl(k){['start','kon','eng'].forEach(function(x){$('c-'+x).classList.toggle('hl',x===k)});
+ document.querySelectorAll('.chip').forEach(function(c){c.classList.toggle('on',c.dataset.p===k)})}
+function fillSlots(){var p=P[prog.value];slot.innerHTML='';
+ p.s.forEach(function(s,i){var o=document.createElement('option');o.value=i;o.textContent=s[0]+(s[1]?' · мест: '+s[1]:' · мест нет (лист ожидания)');slot.appendChild(o)});upd()}
+function upd(){var p=P[prog.value],s=p.s[slot.value||0],full=!s[1];
+ var price=plan.value==='q'?p.q:p.m;
+ sum.innerHTML='Пробное занятие: <b>0 ₽</b><br>Абонемент после пробного («'+p.n+'», '+(plan.value==='q'?'3 месяца':'1 месяц')+'): <b>'+rub(price)+'</b>, оплата только после пробного'+
+ (full?'<br><span class="note">На это время мест нет. Заявка попадёт в лист ожидания — мы сообщим, когда освободится место, или предложим другое время.</span>':'');
+ go.textContent=full?'Встать в лист ожидания':'Отправить заявку'}
+prog.onchange=function(){fillSlots();hl(prog.value)};slot.onchange=upd;plan.onchange=upd;
+function pick(k){prog.value=k;fillSlots();hl(k)}
+document.querySelectorAll('.chip').forEach(function(c){c.onclick=function(){pick(c.dataset.p)}});
+document.querySelectorAll('[data-pick]').forEach(function(a){a.onclick=function(){pick(a.dataset.pick)}});
+f.age.oninput=function(){var v=+f.age.value;for(var k in P){if(v>=P[k].a[0]&&v<=P[k].a[1]){pick(k)}}};
+f.onsubmit=function(e){e.preventDefault();var p=P[prog.value],s=p.s[slot.value],d=new FormData(f);
+ var body='Родитель: '+d.get('name')+'\nКонтакт: '+d.get('contact')+'\nВозраст ребёнка: '+d.get('age')+'\nПрограмма: '+p.n+'\nВремя: '+s[0]+(s[1]?'':' (лист ожидания)')+'\nАбонемент: '+(plan.value==='q'?'3 месяца':'1 месяц')+'\nКомментарий: '+(d.get('msg')||'—');
+ var subj=(s[1]?'Заявка на пробное: ':'Лист ожидания: ')+p.n;
+ $('res').textContent='Открываем письмо с заявкой. Если оно не открылось, напишите нам на hello@robolab-center.example.';
+ location.href='mailto:hello@robolab-center.example?subject='+encodeURIComponent(subj)+'&body='+encodeURIComponent(body)};
+fillSlots();
+</script>
+</body>
+</html>
